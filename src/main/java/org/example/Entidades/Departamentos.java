@@ -2,7 +2,7 @@ package org.example.Entidades;
 
 public class Departamentos {
     //region Atributos
-    private String id;
+    private String _id;
     private String nombre;
     //endregion
 
@@ -11,8 +11,8 @@ public class Departamentos {
     //endregion
 
     //region Getters
-    public String getId() {
-        return id;
+    public String get_id() {
+        return _id;
     }
 
     public String getNombre() {
@@ -28,6 +28,9 @@ public class Departamentos {
     //endregion
 
     //region Metodos
-
+    @Override
+    public String toString(){
+        return this.nombre;
+    }
     //endregion
 }
