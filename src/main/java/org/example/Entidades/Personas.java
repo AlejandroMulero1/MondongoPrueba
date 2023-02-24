@@ -18,8 +18,6 @@ public class Personas {
     private String direccion;
     private String foto;
     private String fechaNacimiento;
-    private int idDepartamento;
-
     private Departamentos departamento;
 
     //endregion
@@ -47,10 +45,6 @@ public class Personas {
 
     public String getFechaNacimiento() {
         return fechaNacimiento;
-    }
-
-    public int getIdDepartamento() {
-        return idDepartamento;
     }
 
     public int getId() {
@@ -95,28 +89,16 @@ public class Personas {
         this.foto = foto;
     }
 
-
-    public void setIdDepartamento(int idDepartamento) {
-        this.idDepartamento = idDepartamento;
-    }
-
     public void setFechaNacimiento(String fechaNacimiento) {
             this.fechaNacimiento = fechaNacimiento;
     }
 
-    public void setIdDepartamento(String idDepartamento) {
-        try {
-            this.idDepartamento = Integer.parseInt(idDepartamento);
-        } catch (NumberFormatException e){
-            System.err.println("Error con el id del Departamento");
-        }
-    }
     //endregion
 
     //region Metodos
     @Override
     public String toString(){
-        return this._id + ": " + this.nombre + " " + this.apellidos + " " + this.departamento.
+        return this._id + ": " + this.nombre + " " + this.apellidos + " " + this.departamento.get_id();
     }
     //endregion
 }
