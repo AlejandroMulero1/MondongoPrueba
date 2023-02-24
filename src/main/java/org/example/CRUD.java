@@ -17,6 +17,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class CRUD {
@@ -41,7 +42,7 @@ public class CRUD {
      * Método que lee todos los registros de una colección pasada por parámetro mostrandolos por pantalla
      * @param collection
      */
-    public static Object Read(MongoCollection<Document> collection){
+    public static Object Read(MongoCollection<Document> collection, Class claseLeer){
         //Lista en la que almaceno todos los datos de la tabla
         List<Object> listaRegistros=new ArrayList<>();
         Scanner sc=new Scanner(System.in);
@@ -57,22 +58,21 @@ public class CRUD {
 
                 //Declaro un ObjectMapper con el que pasaré el json a un objeto
                 ObjectMapper mapper = new ObjectMapper();
-                Personas persona;
+                Object registro;
                 try {
                     //Guardo en la Personas persona lo obtenido del json
-                    persona=mapper.readValue(json, Personas.class);
+                    registro=mapper.readValue(json, claseLeer);
                 }
                 //Controlo las posibles excepciones
                 catch (JsonMappingException e){
                     System.err.println("Se ha producido un error leyendo el objeto");
-                    persona=null;
+                    registro=null;
                     e.printStackTrace();
                 } catch (JsonProcessingException e){
                     System.out.println("Error al convertir el json");
-                    persona=null;
+                    registro=null;
                 }
-                listaRegistros=new ArrayList<>();
-                listaRegistros.add(persona);
+                listaRegistros.add(registro);
             }
             System.out.println("Seleccione un registro");
             for (int i=0; i<listaRegistros.size(); i++){
@@ -86,9 +86,10 @@ public class CRUD {
     public static void Update(MongoCollection<Document> collection, Class claseObjActualizar){
 
     }
+
     public static void Delete(MongoCollection<Document> collection, Class claseObjBorrar){
         System.out.println("Borrar:");
-        Object objBorrar=Read(collection);
+        Object objBorrar=Read(collection, claseObjBorrar);
         if (claseObjBorrar== Personas.class){
             Personas personaBorrar= (Personas) objBorrar;
             collection.deleteOne(new Document("_id", new ObjectId(personaBorrar.get_id())));
@@ -96,5 +97,6 @@ public class CRUD {
             Departamentos dptoBorrar= (Departamentos) objBorrar;
             collection.deleteOne(new Document("_id", new ObjectId(dptoBorrar.get_id())));
         }
+        System.out.println("Borrado exitoso");
     }
 }

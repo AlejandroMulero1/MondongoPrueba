@@ -1,5 +1,7 @@
 package org.example.Entidades;
 
+import org.example.Utilidades;
+
 public class Departamentos {
     //region Atributos
     private String _id;
@@ -8,6 +10,10 @@ public class Departamentos {
 
     //region Constructores
     public Departamentos(){}
+
+    public Departamentos(String nombre){
+        this.nombre=nombre;
+    }
     //endregion
 
     //region Getters
@@ -21,6 +27,9 @@ public class Departamentos {
     //endregion
 
     //region Setters
+    public void set_id(Object _id) {
+        this._id= Utilidades.obtenerIdMongo(_id.toString());
+    }
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
@@ -30,7 +39,7 @@ public class Departamentos {
     //region Metodos
     @Override
     public String toString(){
-        return this.nombre;
+        return this.nombre+ " " + this.get_id();
     }
     //endregion
 }

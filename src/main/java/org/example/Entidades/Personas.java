@@ -1,5 +1,7 @@
 package org.example.Entidades;
 
+import org.example.Utilidades;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -11,19 +13,26 @@ import java.util.Objects;
 public class Personas {
     //region Atributos
     private String _id;
-    private int id;
     private String nombre;
     private String apellidos;
     private String telefono;
     private String direccion;
     private String foto;
-    private String fechaNacimiento;
-    private Departamentos departamento;
+    private String nombreDepartamento;
 
     //endregion
 
     //region Constructores
     public Personas(){}
+
+        public Personas(String nombre, String apellidos, String telefono, String direccion, String foto, String departamento){
+        this.nombre=nombre;
+        this.apellidos=apellidos;
+        this.telefono=telefono;
+        this.direccion=direccion;
+        this.foto=foto;
+        this.nombreDepartamento=departamento;
+    }
     //endregion
 
     //region Getters
@@ -43,14 +52,6 @@ public class Personas {
         return direccion;
     }
 
-    public String getFechaNacimiento() {
-        return fechaNacimiento;
-    }
-
-    public int getId() {
-        return id;
-    }
-
     public String getApellidos() {
         return apellidos;
     }
@@ -58,11 +59,16 @@ public class Personas {
     public String getFoto() {
         return foto;
     }
+
+    public String getNombreDepartamento() {
+        return nombreDepartamento;
+    }
+
     //endregion
 
     //region Setters
     public void set_id(Object _id) {
-        this._id= _id.toString();
+        this._id= Utilidades.obtenerIdMongo(_id.toString());
     }
 
     public void setNombre(String nombre) {
@@ -77,10 +83,6 @@ public class Personas {
         this.direccion = direccion;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public void setApellidos(String apellidos) {
         this.apellidos = apellidos;
     }
@@ -89,8 +91,8 @@ public class Personas {
         this.foto = foto;
     }
 
-    public void setFechaNacimiento(String fechaNacimiento) {
-            this.fechaNacimiento = fechaNacimiento;
+    public void setNombreDepartamento(String nombreDepartamento) {
+        this.nombreDepartamento = nombreDepartamento;
     }
 
     //endregion
@@ -98,7 +100,7 @@ public class Personas {
     //region Metodos
     @Override
     public String toString(){
-        return this._id + ": " + this.nombre + " " + this.apellidos + " " + this.departamento.get_id();
+        return this._id + ": " + this.nombre + " " + this.apellidos + " " + this.nombreDepartamento;
     }
     //endregion
 }
